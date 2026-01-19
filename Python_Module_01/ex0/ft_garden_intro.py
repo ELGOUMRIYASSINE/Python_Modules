@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
+    """ Basic Programm that will run just if the module is the main """
     name = "Carrot"
     height = 1.3
     age = 12
