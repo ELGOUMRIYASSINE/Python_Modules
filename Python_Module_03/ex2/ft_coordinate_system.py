@@ -20,6 +20,7 @@ def Unpacking(pars_point):
     print("\nUnpacking demonstration:")
     x, y, z = pars_point.split(',')
     print(f"Player at x={x}, y={y}, z={z}")
+    print(f"Player at {x=}, {y=}, {z=}")
     print(f"Coordinates: x={x}, y={y}, z={z}")
 
 
