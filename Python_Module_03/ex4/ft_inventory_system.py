@@ -66,22 +66,25 @@ data = {
     }
 }
 
-print("=== Player Inventory System ===")
-count = 0
-inventory_value = 0
-item_count = 0
+print("=== Player Inventory System ===\n")
 
 
 def Inventory(player_name):
+    count = 0
+    categories = ""
     for item_name, quantity in data['players'][player_name]['items'].items():
-        
+
         item_info = data['catalog']
         item_type = item_info[item_name]['type']
         item_value = item_info[item_name]['value']
         item_rarity = item_info[item_name]['rarity']
-        
-        print(f"{item_name} ({item_type}, {item_rarity}): {quantity}x @ {item_value} gold each = {item_value * quantity} gold")
-        # print(f"{item_name} ({data['catalog'][item_name]}, ) {quantity}")
+
+        print(f"{item_name} ({item_type}, {item_rarity}): {quantity}x @"
+              f" {item_value} gold each = {item_value * quantity} gold")
+        categories = categories + f"{item_type}({quantity}),"
+    print(f"\nInventory value: {data['players'][player_name]['total_value']} gold")
+    print(f"Item count: {data['players'][player_name]['item_count']} items")
+    print(f"Categories: {categories}")
 
 
 Inventory('alice')
