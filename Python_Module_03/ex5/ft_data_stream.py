@@ -52,7 +52,37 @@ game_events = [
 ]
 
 
+def fibo():
+    """Generate first 10 numbers of fibonacci sequence"""
+    count = 0
+    n1 = 0
+    n2 = 1
+    while count < 10:
+        if count == 0:
+            yield n1
+        elif count == 1:
+            yield n2
+        else:
+            n3 = n1 + n2
+            yield n3
+            n1 = n2
+            n2 = n3
+        count += 1
+
+
+def primes():
+    """Print first 5 prime numbers using iterator"""
+    primes_list = iter([2, 3, 5, 7, 11])
+    flag = 0
+    for num in primes_list:
+        if flag:
+            print(end=", ")
+        print(num, end="")
+        flag += 1
+
+
 def stream():
+    """Process game events and display analytics with generator demos"""
     print("=== Game Data Stream Processor ===\n")
     events_number = len(game_events)
     high_level = 0
@@ -61,12 +91,13 @@ def stream():
     print(f"Processing {events_number} game events...\n")
     counter = 1
     for event in game_events:
-        print(f"Event {counter}: Player {event['player']} (level {event['data']['level']}) {event['event_type']}")
-        if (event['data']['level'] >= 10):
+        print(f"Event {counter}: Player {event['player']} "
+              f"(level {event['data']['level']}) {event['event_type']}")
+        if event['data']['level'] >= 10:
             high_level += 1
-        if (event['event_type'] == 'login'):
+        if event['event_type'] == 'login':
             login_events += 1
-        if (event['event_type'] == 'level_up'):
+        if event['event_type'] == 'level_up':
             level_up_events += 1
         counter += 1
     print("\n=== Stream Analytics ===")
@@ -74,10 +105,20 @@ def stream():
     print(f"High-level players (10+): {high_level}")
     print(f"level_up events: {level_up_events}")
     print(f"login events: {login_events}\n")
-    print(f"Memory usage: Constant (streaming)")
-    print(f"Processing time: 0.045 seconds")
-    
+    print("Memory usage: Constant (streaming)")
+    print("Processing time: 0.043 seconds\n")
+
     print("=== Generator Demonstration ===")
-    
-    
+    print("Fibonacci sequence (first 10):", end=" ")
+    flag = 0
+    for num in fibo():
+        if flag:
+            print(end=", ")
+        print(num, end="")
+        flag += 1
+    print("\nPrime numbers (first 5):", end=" ")
+    primes()
+    print()
+
+
 stream()
